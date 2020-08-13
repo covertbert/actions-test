@@ -19,7 +19,9 @@ jobs:
 
       - name: Get normalised branch name
         id: normaliseBranchName
-        run: echo "::set-output name=normalisedBranchName::$(./__scripts__/branch-name-for-cleanup.sh "${{ github.event.inputs.normalised-branch-name }}" "${{ github.event.ref }}")"
+        run: |
+          outputName=$(if [[ -z ${{ github.event.inputs.normalised-branch-name }} ]]; then echo "${{ github.event.inputs.normalised-branch-name }}" else echo "${{ github.event.ref }}"; fi)
+          echo "::set-output name=normalisedBranchName::$outputName
 
     outputs:
       normalisedBranchName: ${{ steps.normaliseBranchName.outputs.normalisedBranchName }}
