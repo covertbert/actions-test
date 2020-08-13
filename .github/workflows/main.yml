@@ -6,7 +6,7 @@ on:
       normalised-branch-name:
         description: "Normalised branch name to cleanup"
         required: true
-  push:
+  delete:
 
 jobs:
   prerequisites:
