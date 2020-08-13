@@ -24,7 +24,7 @@ jobs:
           BRANCH_REF: ${{ github.event.ref }}
         run: |
           normalisedBranchName=$(./__scripts__/normalise-branch.sh $BRANCH_REF)
-          outputName=$([[ $MANUAL_INPUT ]] && echo "$MANUAL_INPUT" || echo "$normalisedBranchName"
+          outputName=$([[ $MANUAL_INPUT ]] && echo "$MANUAL_INPUT" || echo "$normalisedBranchName")
           echo "::set-output name=normalisedBranchName::$outputName"
 
     outputs:
