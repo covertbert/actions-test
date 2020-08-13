@@ -1,0 +1,41 @@
+name: Test
+
+on: 
+  push
+  workflow_dispatch:
+    inputs:
+      normalised-branch-name:
+        description: 'Normalised branch name to cleanup'
+        required: true
+
+jobs:
+  prerequisites:
+    runs-on: ubuntu-latest
+    name: Prerequisites
+
+    steps:
+      - name: 'Checking out from GitHub'
+        uses: 'actions/checkout@v2'
+
+      - name: Get normalised branch name from manual input
+        id: normaliseBranchName
+        if: ${{ github.event.inputs.name }}
+        run: echo "::set-output name=normalisedBranchName::${{ github.event.inputs.name }}"
+
+      - name: Get normalised branch name from branch
+        id: normaliseBranchName
+        if: ${{ !github.event.inputs.name }}
+        run: echo "::set-output name=normalisedBranchName::$BRANCH_REF"
+
+    outputs:
+      normalisedBranchName: ${{ steps.normaliseBranchName.outputs.normalisedBranchName }}
+
+  get-outputs:
+    runs-on: ubuntu-latest
+    name: Outputs
+    needs: prerequisites
+
+    steps:
+      - name: Log output
+        run: echo ${{ needs.prerequisites.outputs.normalisedBranchName }}
+
