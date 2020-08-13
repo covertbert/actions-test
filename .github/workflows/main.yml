@@ -23,7 +23,7 @@ jobs:
           MANUAL_INPUT: ${{ github.event.inputs.normalised-branch-name }}
           BRANCH_NAME: ${{ github.event.ref }}
         run: |
-          outputName=$(if [[ -z $MANUAL_INPUT ]]; then echo "$MANUAL_INPUT" else echo "$BRANCH_NAME"; fi)
+          outputName=$(if [[ -z $MANUAL_INPUT ]]; then echo "$MANUAL_INPUT"; else echo "$BRANCH_NAME"; fi)
           echo "::set-output name=normalisedBranchName::$outputName"
 
     outputs:
