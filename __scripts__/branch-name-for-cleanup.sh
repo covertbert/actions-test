@@ -3,5 +3,8 @@
 manualInput=$1
 branchName=$2
 
-echo "$manualInput"
-echo "$branchName"
+if [[ -z $manualInput ]]; then
+    echo "$manualInput"
+else
+    echo "$branchName"
+fi
