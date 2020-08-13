@@ -21,7 +21,7 @@ jobs:
         id: normaliseBranchName
         run: |
           outputName=$(if [[ -z ${{ github.event.inputs.normalised-branch-name }} ]]; then echo "${{ github.event.inputs.normalised-branch-name }}" else echo "${{ github.event.ref }}"; fi)
-          echo "::set-output name=normalisedBranchName::$outputName
+          echo "::set-output name=normalisedBranchName::$outputName"
 
     outputs:
       normalisedBranchName: ${{ steps.normaliseBranchName.outputs.normalisedBranchName }}
