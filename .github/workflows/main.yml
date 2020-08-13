@@ -21,9 +21,10 @@ jobs:
         id: normaliseBranchName
         env:
           MANUAL_INPUT: ${{ github.event.inputs.normalised-branch-name }}
-          BRANCH_NAME: ${{ github.event.ref }}
+          BRANCH_REF: ${{ github.event.ref }}
         run: |
-          outputName=$(if [[ $MANUAL_INPUT ]]; then echo "$MANUAL_INPUT"; else echo "$BRANCH_NAME"; fi)
+          normalisedBranchName::$(./__scripts__/normalise-branch.sh $BRANCH_REF)
+          outputName=$(if [[ $MANUAL_INPUT ]]; then echo "$MANUAL_INPUT"; else echo "$normalisedBranchName"; fi)
           echo "::set-output name=normalisedBranchName::$outputName"
 
     outputs:
