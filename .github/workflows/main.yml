@@ -1,12 +1,12 @@
 name: Test
 
-on: 
-  push
+on:
   workflow_dispatch:
     inputs:
       normalised-branch-name:
-        description: 'Normalised branch name to cleanup'
+        description: "Normalised branch name to cleanup"
         required: true
+  push:
 
 jobs:
   prerequisites:
@@ -14,8 +14,8 @@ jobs:
     name: Prerequisites
 
     steps:
-      - name: 'Checking out from GitHub'
-        uses: 'actions/checkout@v2'
+      - name: "Checking out from GitHub"
+        uses: "actions/checkout@v2"
 
       - name: Get normalised branch name from manual input
         id: normaliseBranchName
@@ -38,4 +38,3 @@ jobs:
     steps:
       - name: Log output
         run: echo ${{ needs.prerequisites.outputs.normalisedBranchName }}
-
