@@ -17,15 +17,11 @@ jobs:
       - name: "Checking out from GitHub"
         uses: "actions/checkout@v2"
 
-      - name: Get normalised branch name from manual input
+      - name: Get normalised branch name
         id: normaliseBranchName
-        if: ${{ github.event.inputs.name }}
-        run: echo "::set-output name=normalisedBranchName::${{ github.event.inputs.name }}"
-
-      - name: Get normalised branch name from branch
-        id: normaliseBranchName
-        if: ${{ !github.event.inputs.name }}
-        run: echo "::set-output name=normalisedBranchName::$BRANCH_REF"
+        run: |
+          ./__scripts__/branch-name-for-cleanup.sh "${{ github.event.inputs.name }}" "$BRANCH_REF"
+          echo "::set-output name=normalisedBranchName::${{ github.event.inputs.name }}"
 
     outputs:
       normalisedBranchName: ${{ steps.normaliseBranchName.outputs.normalisedBranchName }}
