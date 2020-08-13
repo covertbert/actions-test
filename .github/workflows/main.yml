@@ -20,7 +20,7 @@ jobs:
       - name: Get normalised branch name
         id: normaliseBranchName
         run: |
-          ./__scripts__/branch-name-for-cleanup.sh "${{ github.event.inputs.name }}" "$BRANCH_REF"
+          ./__scripts__/branch-name-for-cleanup.sh "${{ github.event.inputs.name }}" "${{ github.event.ref }}"
           echo "::set-output name=normalisedBranchName::${{ github.event.inputs.name }}"
 
     outputs:
